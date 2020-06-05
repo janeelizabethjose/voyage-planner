@@ -64,7 +64,7 @@ function RegistrationForm(props) {
         }
     }
     return(
-        <div className="container d-flex align-items-center flex-column" style={{paddingTop:"100px"}}>
+        <div className="container d-flex align-items-center flex-column" style={{paddingTop:"80px"}}>
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
         <span className="headerStyle">Register Here</span>
             <form>

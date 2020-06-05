@@ -1,4 +1,4 @@
-var userModal= require('../model/userModal');
+var userModel= require('../model/userModel');
 var paramValidator = require('../validators/paramValidator');
 
 let userController = {
@@ -9,7 +9,7 @@ let userController = {
         }) !== true) {
             return res.status(500).json({ error: paramValidator.errorMessage });
         }
-        userModal.createUser(req.body).then(response => {
+        userModel.createUser(req.body).then(response => {
             var responseData = {
                 "data": response
             }
@@ -26,9 +26,9 @@ let userController = {
         }) !== true) {
             return res.status(500).json({ error: paramValidator.errorMessage });
         }
-        userModal.login(req.body).then(response => {
+        userModel.login(req.body).then(response => {
             var responseData = {
-                "data": response
+                "rows": response
             }
             return res.status(200).json(responseData);
         }).catch(error => {

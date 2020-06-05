@@ -26,20 +26,27 @@ function LoginForm(props) {
         }
         axios.post(API_BASE_URL+'login', payload)
             .then(function (response) {
-                console.log(payload);
                 if(response.status === 200){
-                    setState(prevState => ({
-                        ...prevState,
-                        'successMessage' : 'Login successful. Redirecting to home page..'
-                    }))
-                    redirectToHome();
-                    props.showError(null)
+                    if(response.data.rows){
+                        setState(prevState => ({
+                            ...prevState,
+                            'successMessage' : 'Login successful. Redirecting to home page..'
+                        }));
+                        localStorage.setItem('userID', response.data.rows.id);
+                        const userID = localStorage.getItem('userID');
+                        localStorage.setItem('email', response.data.rows.email);
+                        const email = localStorage.getItem('email');
+                        redirectToHome();
+                        props.showError(null)
+                    }else{
+                        props.showError("Username does not exists!");
+                    }
                 }
-                else if(response.data.code === 204){
-                    props.showError("Username and password do not match");
+                else if(response.status === 204){
+                    props.showError("Username and password do not match!");
                 }
                 else{
-                    props.showError("Username does not exists");
+                    props.showError("Username does not exists!");
                 }
             })
             .catch(function (error) {
@@ -65,7 +72,7 @@ function LoginForm(props) {
     }
 
     return(
-        <div className="container d-flex align-items-center flex-column" style={{paddingTop:"100px"}}>
+        <div className="container d-flex align-items-center flex-column" style={{paddingTop:"80px"}}>
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
         <span className="headerStyle">Login Here</span>
             <form>

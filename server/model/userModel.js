@@ -1,6 +1,6 @@
 var db = require('../db/dbConnection');
 
-var userModal = {
+var userModel = {
     createUser: function (params) {
         try {
             return new Promise((resolve, reject) => {
@@ -23,15 +23,14 @@ var userModal = {
     login: function (params) {
         try {
             return new Promise((resolve, reject) => {
-                let insertstmt = `SELECT * FROM users WHERE email = ? AND password = ?`;
-                let insertValue = [params.email,params.password];
-                console.log(insertValue);
-                db.query(insertstmt,insertValue, (error, rows) => {
+                let selectStatement = `SELECT id, email FROM users WHERE email = ? AND password = ?`;
+                let selectValue = [params.email,params.password];
+                db.query(selectStatement,selectValue, (error, rows) => {
                     if (error) {
                         reject(error);
                     }
                     else {
-                        resolve(rows);
+                        resolve(rows[0]);
                     }
                 });
             });
@@ -40,4 +39,4 @@ var userModal = {
         }
     }
 };
-module.exports = userModal;
+module.exports = userModel;

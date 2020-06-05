@@ -16,11 +16,15 @@ const Menu = ({ open, ...props }) => {
       <a href="/" tabIndex={tabIndex}>
         <span aria-hidden="true">🚋</span>
         Up-Coming
-        </a>
+      </a>
       <a href="/" tabIndex={tabIndex}>
         <span aria-hidden="true">⌛</span>
         Bygone
-        </a>
+      </a>
+      <a href="/" tabIndex={tabIndex}>
+        <span aria-hidden="true">👋</span>
+        Logout
+      </a>
     </StyledMenu>
   )
 }
