@@ -28,6 +28,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import * as moment from 'moment';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -82,7 +83,6 @@ function Home(props) {
         axios.post(API_BASE_URL + 'getTripInfo', payload)
             .then(function (response) {
                 if (response.status === 200) {
-                    console.log(response.data.rows);
                     setTrip(response.data.rows);
                 }
                 else if (response.status === 204) {
@@ -128,15 +128,15 @@ function Home(props) {
                                         <StyledTableCell component="th" scope="row">
                                             {row.name}
                                         </StyledTableCell>
-                                        <StyledTableCell align="right">{row.start_date}</StyledTableCell>
-                                        <StyledTableCell align="right">{row.end_date}</StyledTableCell>
+                                        <StyledTableCell align="right">{moment(row.start_date).format('YYYY-MM-DD')}</StyledTableCell>
+                                        <StyledTableCell align="right">{moment(row.end_date).format('YYYY-MM-DD')}</StyledTableCell>
                                         <StyledTableCell align="right">{row.destination}</StyledTableCell>
                                         <StyledTableCell align="right"><Link
                                             component="button"
                                             variant="body2"
                                             onClick={() => props.history.push(
                                                 {
-                                                    pathname: '/trip',
+                                                    pathname: '/tripDashboard',
                                                     state: { detail: row }
                                                 }
                                             )}
