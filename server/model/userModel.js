@@ -5,8 +5,8 @@ var userModel = {
         try {
             return new Promise((resolve, reject) => {
                 let insertstmt = `INSERT INTO users(email,password) VALUES(?,?)`;
-                let insertValue = [params.email,params.password];
-                db.query(insertstmt,insertValue, (error, rows) => {
+                let insertValue = [params.email, params.password];
+                db.query(insertstmt, insertValue, (error, rows) => {
                     if (error) {
                         reject(error);
                     }
@@ -24,8 +24,8 @@ var userModel = {
         try {
             return new Promise((resolve, reject) => {
                 let selectStatement = `SELECT id, email FROM users WHERE email = ? AND password = ?`;
-                let selectValue = [params.email,params.password];
-                db.query(selectStatement,selectValue, (error, rows) => {
+                let selectValue = [params.email, params.password];
+                db.query(selectStatement, selectValue, (error, rows) => {
                     if (error) {
                         reject(error);
                     }

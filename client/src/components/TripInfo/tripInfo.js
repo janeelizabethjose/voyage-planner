@@ -20,7 +20,7 @@ function getModalStyle() {
     };
 }
 
-let textName;
+let textName, textDestination;
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -38,44 +38,67 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function DayInfoForm(props) {
+function TripInfoForm(props) {
     const classes = useStyles();
     const [modalStyle] = useState(getModalStyle);
 
-    const handleDateChange = (date) => {
-        props.updateTripDate(date)
+    const handleStartDateChange = (date) => {
+        props.updateStartDate(date)
+    };
+
+    const handleEndDateChange = (date) => {
+        props.updateEndDate(date)
     };
 
     const handleClose = () => {
         props.toggleModal();
     };
 
-    const handleAddDay = () => {
-        props.insertDayInfo(textName);
+    const handleAddTrip = () => {
+        let tripDetails = {}
+        tripDetails.Name = textName;
+        tripDetails.Destinaton = textDestination;
+        props.insertTripInfo(tripDetails);
     };
 
     const handleGetName = (e) => {
         textName = e.target.value;
     }
 
+    const handleGetDestination = (e) => {
+        textDestination = e.target.value;
+    }
+
     const body = (
         <div style={modalStyle} className={classes.paper}>
-            <h3 id="simple-modal-title">Add a Trip Day</h3>
+            <h3 id="simple-modal-title">Add a Trip</h3>
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField id="standard-basic" label="Name" onChange={handleGetName} />
+                <TextField id="standard-basic" label="Destination" onChange={handleGetDestination} />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
                         margin="normal"
                         id="date-picker-dialog"
-                        label="Trip Date"
+                        label="Start Date"
                         format="dd-MM-yyyy"
-                        value={props.InitialDate}
-                        onChange={handleDateChange}
+                        value={props.InitialStartDate}
+                        onChange={handleStartDateChange}
+                        disablePast="true"
+                    />
+                </MuiPickersUtilsProvider>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="End Date"
+                        format="dd-MM-yyyy"
+                        value={props.InitialEndDate}
+                        onChange={handleEndDateChange}
                         disablePast="true"
                     />
                 </MuiPickersUtilsProvider>
                 <div className={classes.root}>
-                    <Button variant="contained" color="secondary" onClick={handleAddDay}>
+                    <Button variant="contained" color="secondary" onClick={handleAddTrip}>
                         Save
                     </Button>
                 </div>
@@ -95,4 +118,4 @@ function DayInfoForm(props) {
         </div>
     )
 }
-export default DayInfoForm;
+export default TripInfoForm;

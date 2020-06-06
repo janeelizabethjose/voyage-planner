@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from '../../global';
 import { theme } from '../Themes/theme';
 import './home.css';
+import TripInfo from '../TripInfo/tripInfo';
 
 import Header from '../Header/header';
 
@@ -21,13 +22,7 @@ import { Route, withRouter } from "react-router-dom";
 
 //table start
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@material-ui/core';
 import * as moment from 'moment';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -60,11 +55,14 @@ const useStyles = makeStyles({
 //table end
 
 function Home(props) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
     const node = useRef();
     const menuId = "main-menu";
     const [Trip, setTrip] = useState([]);
     const [userID, setUserID] = useState(0);
+    const [startDate, setStartDate] = useState(moment().format('MM-DD-YYYY'));
+    const [endDate, setEndDate] = useState(moment().format('MM-DD-YYYY'));
 
     useOnClickOutside(node, () => setOpen(false));
     //table start
@@ -97,12 +95,50 @@ function Home(props) {
             });
     };
 
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    }
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    }
+
+    const handleUpdateStartDate = (metaData) => {
+        setStartDate(moment(metaData).format('YYYY-MM-DD'))
+    }
+
+    const handleUpdatEndDate = (metaData) => {
+        setEndDate(moment(metaData).format('YYYY-MM-DD'))
+    }
+
+    const handleinsertTripInfo = (metaData) => {
+        const payload = {
+            "name": metaData.Name,
+            "destination": metaData.Destinaton,
+            "startDate": moment(startDate).format('YYYY-MM-DD'),
+            "endDate": moment(endDate).format('YYYY-MM-DD'),
+            "userID": localStorage.getItem("userID")
+        }
+        axios.post(API_BASE_URL + 'createTrip', payload)
+            .then(function (response) {
+                if (response.status === 200) {
+                    handleCloseModal();
+                    getTripInformation();
+                }
+                else {
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Header />
 
             <>
-                {/* <GlobalStyles /> */}
                 <Burger></Burger>
                 <div ref={node}>
                     <FocusLock disabled={!open}>
@@ -110,7 +146,11 @@ function Home(props) {
                         <Menu open={open} setOpen={setOpen} id={menuId} />
                     </FocusLock>
                 </div>
-                <div style={{ paddingTop: "150px" }}>
+
+                <div style={{ paddingTop: "150px", paddingLeft: "150px" }}>
+                    <Button variant="contained" color="secondary" onClick={() => handleOpenModal()} style={{ marginLeft: "800px", marginBottom: "20px" }}>
+                        Add a New Trtip
+                    </Button>
                     <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="customized table">
                             <TableHead>
@@ -149,7 +189,15 @@ function Home(props) {
                         </Table>
                     </TableContainer>
                 </div>
-
+                <TripInfo
+                    showModal={openModal}
+                    InitialStartDate={startDate}
+                    InitialEndDate={endDate}
+                    toggleModal={handleCloseModal}
+                    updateStartDate={handleUpdateStartDate}
+                    updateEndDate={handleUpdatEndDate}
+                    insertTripInfo={handleinsertTripInfo}
+                />
             </>
         </ThemeProvider>
     )

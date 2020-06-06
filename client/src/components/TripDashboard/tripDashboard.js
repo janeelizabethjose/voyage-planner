@@ -20,25 +20,12 @@ function TripDashboardForm(props) {
     const node = useRef();
     const menuId = "main-menu";
 
-    // const [tripDetail, setTripDetail] = useState(props.history.location.state.detail);
-    // const startDate = moment(tripDetail.start_date).format('YYYY-MM-DD');
-    // const endDate = moment(tripDetail.end_date).format('YYYY-MM-DD');
-    // var momentStartDate = moment(startDate);
-    // var momentendDate = moment(endDate);
-    // var dateDiff = momentendDate.diff(momentStartDate, 'days');
-
     useOnClickOutside(node, () => setOpen(false));
 
     useEffect(() => {
         //getTripInformation();
     }, []);
 
-    // const classes = useStyles();
-    // const GoBackButton = withRouter(({ history }) => (
-    //     <IconButton onClick={() => history.goBack()}>
-    //         <Icon>chevron_left</Icon>
-    //     </IconButton>
-    // ));
     return (
         <ThemeProvider theme={theme}>
             <Header />
