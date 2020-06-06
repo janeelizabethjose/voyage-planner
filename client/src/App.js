@@ -6,6 +6,7 @@ import RegistrationForm from './components/Registration/registration';
 import Home from './components/Home/home';
 import TripForm from './components/Trip/trip';
 import TripDashboard from './components/TripDashboard/tripDashboard'
+import TripDayEvent from './components/TripDayEvent/tripDayEvent'
 import AlertComponent from './components/Alert/alert';
 import {
   BrowserRouter as Router,
@@ -39,8 +40,11 @@ function App() {
             <Route path="/trip">
               <TripForm showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
-            <Route path="/tripDashboard">
+            <Route path="/tripdashboard">
               <TripDashboard showError={updateErrorMessage} updateTitle={updateTitle} />
+            </Route>
+            <Route path="/event">
+              <TripDayEvent showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
           </Switch>
           <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} />

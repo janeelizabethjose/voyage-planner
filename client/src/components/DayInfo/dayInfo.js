@@ -71,6 +71,7 @@ function DayInfoForm(props) {
                         format="dd-MM-yyyy"
                         value={props.InitialDate}
                         onChange={handleDateChange}
+                        maxDate={props.TripMaxDate}
                         disablePast="true"
                     />
                 </MuiPickersUtilsProvider>

@@ -93,6 +93,7 @@ function TripInfoForm(props) {
                         label="End Date"
                         format="dd-MM-yyyy"
                         value={props.InitialEndDate}
+                        minDate={props.InitialStartDate}
                         onChange={handleEndDateChange}
                         disablePast="true"
                     />

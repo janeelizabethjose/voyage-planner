@@ -1,0 +1,98 @@
+import React, { useState, useRef, useEffect, useSelector } from 'react';
+import { API_BASE_URL } from '../../constants/apiContants';
+import axios from 'axios';
+import { withRouter } from "react-router-dom";
+import * as moment from 'moment';
+
+import { theme } from '../Themes/theme';
+import {
+    Button,
+    Chip,
+    createStyles,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Fab,
+    Grid,
+    Icon,
+    makeStyles,
+    Paper,
+    Theme,
+    Typography,
+} from '@material-ui/core';
+
+const useStyles = makeStyles((theme) =>
+    createStyles({
+    })
+);
+
+function TripDayEventForm(props) {
+    const eventIcon = (category) => {
+        if (category === 1) {
+            return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}> directions_run</Icon>;
+        } else if (category === 2) {
+            return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}>directions_bus</Icon>;
+        } else if (category === 3) {
+            return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}> info</Icon>;
+        } else if (category === 4) {
+            return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}> hotel</Icon>;
+        } else if (category === 5) {
+            return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}> flight</Icon>;
+        } else if (category === 6) {
+            return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}>directions_boat</Icon>;
+        }
+    };
+
+    const classes = useStyles({});
+    return (
+        <div className={classes.eventWrapper} style={{ marginTop: "30px" }} >
+            {props.TripDayEvents && props.TripDayEvents.map((row) => (
+                < Paper className={classes.paperRoot} style={{ marginTop: "50px" }} key={row.id}>
+                    <Grid container direction='row' spacing={2}>
+                        <Grid item xs={2} style={{ borderRight: '2px dodgerblue solid' }}>
+                            {eventIcon(row.category_id)}
+                        </Grid>
+                        <Grid item xs={false}>
+                            <Grid container direction='column' style={{ textAlign: "left" }}>
+                                <Typography variant='h5' component='h3'>
+                                    <strong>{row.title}</strong>
+                                </Typography>
+                                <Typography variant='subtitle1'><strong>Start at: </strong> {moment(row.start_time).format("DD-MM-YYYY hh:mm A")}</Typography>
+                                <Typography variant='subtitle1'><strong>End at: </strong> {moment(row.end_time).format("DD-MM-YYYY hh:mm A")}</Typography>
+                                <Typography variant='subtitle1'><strong>From: </strong>{row.start_location}</Typography>
+                                <Typography variant='subtitle1'><strong>To: </strong>{row.end_location}</Typography>
+                                <Typography variant='subtitle1'>
+                                    <strong> Price: </strong>{row.cost} ({row.currency_code})
+                                </Typography>
+                            </Grid>
+                            <Grid container direction='row' alignItems='center'>
+                                <Icon>label</Icon>
+                                {row.tag && row.tag.split(',').map((t, index) => (
+                                    <Chip key={`${t}-${index}`} size='small' label={t} className={classes.chip} color='primary' />
+                                ))}
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={2} container direction='row' justify='flex-end' alignItems='center'>
+                            <Fab color='primary' size='small' aria-label='edit' className={classes.fab}>
+                                <Icon>edit</Icon>
+                            </Fab>
+                            <Fab
+                                color='secondary'
+                                size='small'
+                                aria-label='delete'
+                                className={classes.fab}
+                            // onClick={() => setDialogOpen(true)}
+                            >
+                                <Icon>delete</Icon>
+                            </Fab>
+                        </Grid>
+                    </Grid>
+                </Paper >
+            ))}
+        </div >
+    )
+}
+
+export default withRouter(TripDayEventForm);

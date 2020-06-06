@@ -72,6 +72,26 @@ var tripModel = {
         } catch (e) {
             console.log(e);
         }
-    }
+    },
+    getTripDayEventInfo: function (params) {
+        try {
+            return new Promise((resolve, reject) => {
+                let selectStatement = `SELECT e.id, e.trip_day_id, e.category_id, e.currency_id, e.start_time, e.end_time, e.title, e.start_location, e.end_location, e.note, e.tag, e.cost, c.code currency_code, c.name currency_name
+                                    FROM events e JOIN currencies c ON e.currency_id = c.id 
+                                    WHERE trip_day_id = ? AND user_id = ? order by start_time asc`;
+                let selectValue = [params.tripDayID, params.userID];
+                db.query(selectStatement, selectValue, (error, rows) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    },
 };
 module.exports = tripModel;

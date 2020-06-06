@@ -105,6 +105,7 @@ function Home(props) {
 
     const handleUpdateStartDate = (metaData) => {
         setStartDate(moment(metaData).format('YYYY-MM-DD'))
+        setEndDate(moment(metaData).format('YYYY-MM-DD'))
     }
 
     const handleUpdatEndDate = (metaData) => {
@@ -176,7 +177,7 @@ function Home(props) {
                                             variant="body2"
                                             onClick={() => props.history.push(
                                                 {
-                                                    pathname: '/tripDashboard',
+                                                    pathname: '/tripdashboard',
                                                     state: { detail: row }
                                                 }
                                             )}

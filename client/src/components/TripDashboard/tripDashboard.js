@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect, useSelector } from 'react';
-import { API_BASE_URL } from '../../constants/apiContants';
-import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
 import Header from '../Header/header';
@@ -12,7 +10,7 @@ import Burger from '../Burger/burger';
 import Menu from '../Menu/menu';
 import FocusLock from 'react-focus-lock';
 import Trip from '../Trip/trip';
-import TripDayForm from '../TripDay/tripDay';
+import TripDay from '../TripDay/tripDay';
 
 
 function TripDashboardForm(props) {
@@ -37,7 +35,7 @@ function TripDashboardForm(props) {
                 </FocusLock>
             </div>
             <Trip />
-            <TripDayForm />
+            <TripDay />
         </ThemeProvider >
     )
 }
