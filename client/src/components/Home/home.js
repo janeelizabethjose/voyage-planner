@@ -58,6 +58,12 @@ function Home(props) {
     const [startDate, setStartDate] = useState(moment().format('MM-DD-YYYY'));
     const [endDate, setEndDate] = useState(moment().format('MM-DD-YYYY'));
 
+    const [checkName, setCheckName] = useState(false);
+    const [checkDestination, setcheckDestination] = useState(false);
+    const [Name, setName] = useState();
+    const [Destination, setDestination] = useState();
+
+
     //useOnClickOutside(node, () => setOpen(false));
 
     const classes = useStyles();
@@ -89,8 +95,28 @@ function Home(props) {
             });
     };
 
+    const handleUpdateName = (data) => {
+        setName(data);
+    }
+
+    const handleUpdateDestination = (data) => {
+        setDestination(data);
+    }
+
+    const validateName = () => {
+        setCheckName(true);
+    }
+
+    const validateDestination = () => {
+        setcheckDestination(true);
+    }
+
     const handleCloseModal = () => {
         setOpenModal(false);
+        setCheckName(false);
+        setcheckDestination(false);
+        setDestination();
+        setName();
     }
 
     const handleOpenModal = () => {
@@ -142,7 +168,7 @@ function Home(props) {
                     </FocusLock>
                 </div> */}
 
-                <div style={{ paddingTop: "150px", paddingLeft: "150px" }}>
+                <div style={{ paddingTop: "150px" }}>
                     <Button variant="contained" color="secondary" onClick={() => handleOpenModal()} style={{ marginLeft: "800px", marginBottom: "20px" }}>
                         Add a New Trtip
                     </Button>
@@ -186,12 +212,20 @@ function Home(props) {
                 </div>
                 <TripInfo
                     showModal={openModal}
+                    Name={Name}
+                    Destination={Destination}
                     InitialStartDate={startDate}
                     InitialEndDate={endDate}
+                    checkName={checkName}
+                    checkDestination={checkDestination}
+                    updateName={handleUpdateName}
+                    updateDestination={handleUpdateDestination}
                     toggleModal={handleCloseModal}
                     updateStartDate={handleUpdateStartDate}
                     updateEndDate={handleUpdatEndDate}
                     insertTripInfo={handleinsertTripInfo}
+                    validateName={validateName}
+                    validateDestination={validateDestination}
                 />
             </>
         </ThemeProvider>

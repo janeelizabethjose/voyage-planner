@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) =>
 function TripDayEventForm(props) {
 
     const classes = useStyles({});
-    console.log(props);
     const eventIcon = (category) => {
         if (category === 1) {
             return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}> directions_run</Icon>;

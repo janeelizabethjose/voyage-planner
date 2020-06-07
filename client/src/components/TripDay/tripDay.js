@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 function TripDayForm(props) {
+    //console.log(props);
+    //const dashboard = useSelector(state.dashboard);
     const [open, setOpen] = useState(false);
     const [openEvent, setOpenEvent] = useState(false);
     const [tripDetail, setTripDetail] = useState(props.history.location.state.detail);
@@ -144,6 +146,7 @@ function TripDayForm(props) {
     };
 
     const handleTripDayEvent = (metaData) => {
+        console.log(metaData);
         if (metaData.id) {
             setTripDayId(metaData.id);
             setTripDayDetails(metaData);
@@ -168,7 +171,7 @@ function TripDayForm(props) {
 
     return (
         <>
-            <div className={classes.root} style={{ marginTop: "10px", marginLeft: "200px" }}>
+            <div className={classes.root} style={{ marginTop: "10px" }}>
                 <Paper style={{ width: "200px" }}>
                     <List>
                         <ListItem button key='New Day' onClick={() => handleOpenModal()}>
@@ -182,7 +185,7 @@ function TripDayForm(props) {
                             <ListItem
                                 key={row.id}
                                 button
-                                // selected={dashboard.selectedTripDayId === tripDay.id}
+                                // selected={row.id}
                                 onClick={() => handleTripDayEvent(row)}
                             >
                                 <ListItemText>{moment(row.trip_date).format('YYYY-MM-DD')}</ListItemText>
@@ -193,7 +196,7 @@ function TripDayForm(props) {
                         ))}
                     </List>
                 </Paper>
-                <Paper style={{ width: "690px", marginLeft: "20px" }}>
+                <Paper style={{ width: "905px", marginLeft: "5px" }}>
                     <div>
                         <Grid container direction='row' justify='flex-start' alignItems='center' spacing={2}>
                             <Grid item>
@@ -217,9 +220,6 @@ function TripDayForm(props) {
                     <TripDayEvent
                         TripDayEvents={TripDayEvents}
                     />
-                    {/* {tripEventList.map((tripEvent: TripEvent) => ( */}
-                    {/* <EventComponent /> */}
-                    {/* ))} */}
                 </Paper>
             </div>
             <DayInfo

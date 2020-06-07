@@ -20,8 +20,6 @@ function getModalStyle() {
     };
 }
 
-let textName, textDestination;
-
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
@@ -56,25 +54,49 @@ function TripInfoForm(props) {
 
     const handleAddTrip = () => {
         let tripDetails = {}
-        tripDetails.Name = textName;
-        tripDetails.Destinaton = textDestination;
-        props.insertTripInfo(tripDetails);
+        if (props.Name && props.Destination) {
+            tripDetails.Name = props.Name;
+            tripDetails.Destinaton = props.Destination;
+            props.insertTripInfo(tripDetails);
+        } else {
+            if (props.Name == "" || props.Name == null || props.Name == undefined) {
+                props.validateName();
+            }
+            if (props.Destination == "" || props.Destination == null || props.Destination == undefined) {
+                props.validateDestination();
+            }
+        }
     };
 
     const handleGetName = (e) => {
-        textName = e.target.value;
+        props.updateName(e.target.value);
     }
 
     const handleGetDestination = (e) => {
-        textDestination = e.target.value;
+        props.updateDestination(e.target.value);
     }
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <h3 id="simple-modal-title">Add a Trip</h3>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Name *" onChange={handleGetName} fullWidth />
-                <TextField id="standard-basic" label="Destination *" onChange={handleGetDestination} fullWidth />
+                <TextField
+                    error={props.checkName}
+                    helperText="Please enter name"
+                    id="standard-basic"
+                    label="Name *"
+                    onChange={handleGetName}
+                    helperText={props.checkName ? 'Enter Name' : ''}
+                    fullWidth
+                />
+                <TextField
+                    error={props.checkDestination}
+                    id="standard-basic"
+                    label="Destination *"
+                    onChange={handleGetDestination}
+                    helperText={props.checkDestination ? 'Enter Destination' : ''}
+                    fullWidth
+                />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
                         margin="normal"

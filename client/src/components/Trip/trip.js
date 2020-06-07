@@ -46,7 +46,7 @@ function TripForm(props) {
         </IconButton>
     ));
     return (
-        <div className={classes.root} style={{ paddingTop: "120px", marginLeft: "200px" }}>
+        <div className={classes.root} style={{ paddingTop: "120px" }}>
             <Paper elevation={3}>
                 <Grid container alignItems='center' spacing={2}>
                     <Grid>
@@ -63,7 +63,6 @@ function TripForm(props) {
                             <Typography variant='body2'>
                                 {tripDetail.name}
                             </Typography>
-                            {/* {!isEmpty(tripDetail.name) && <Typography variant='body2'>{tripDetail.name}</Typography>} */}
                         </Grid>
                     </Grid>
                     <Grid item>
