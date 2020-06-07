@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { API_BASE_URL } from '../../constants/apiContants';
 import DayInfo from '../DayInfo/dayInfo';
+import EventInfo from '../EventInfo/eventInfo';
 import * as moment from 'moment';
 
 import TripDayEvent from '../TripDayEvent/tripDayEvent';
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) =>
 
 function TripDayForm(props) {
     const [open, setOpen] = useState(false);
+    const [openEvent, setOpenEvent] = useState(false);
     const [tripDetail, setTripDetail] = useState(props.history.location.state.detail);
     const classes = useStyles();
 
@@ -46,6 +48,14 @@ function TripDayForm(props) {
 
     const handleUpdateTripDate = (metaData) => {
         setTripDate(moment(metaData).format('YYYY-MM-DD'));
+    }
+
+    const handleOpenEventModal = () => {
+        setOpenEvent(true);
+    }
+
+    const handleCloseEventModal = () => {
+        setOpenEvent(false);
     }
 
     const getTripDayInformation = (e) => {
@@ -145,7 +155,7 @@ function TripDayForm(props) {
                                     variant='contained'
                                     color='primary'
                                     size='medium'
-                                // onClick={() => dispatch(openTripEventForm(true))}
+                                    onClick={() => handleOpenEventModal()}
                                 >
                                     <Icon className={classes.buttonIcon}>add</Icon> New Event
                                 </Button>
@@ -165,6 +175,15 @@ function TripDayForm(props) {
                 InitialDate={TripDate}
                 TripMaxDate={TripMaxDate}
                 toggleModal={handleCloseModal}
+                insertDayInfo={handleinsertDayInfo}
+                updateTripDate={handleUpdateTripDate}
+            />
+
+            <EventInfo
+                showModal={openEvent}
+                InitialDate={TripDate}
+                TripMaxDate={TripMaxDate}
+                toggleModal={handleCloseEventModal}
                 insertDayInfo={handleinsertDayInfo}
                 updateTripDate={handleUpdateTripDate}
             />

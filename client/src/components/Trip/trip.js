@@ -27,7 +27,8 @@ function TripForm(props) {
     const node = useRef();
     const menuId = "main-menu";
 
-    const [tripDetail, setTripDetail] = useState(props.history.location.state.detail);
+    const [tripDetail, setTripDetail] = useState(props.location.state.detail);
+    console.log(props);
     const startDate = moment(tripDetail.start_date).format('YYYY-MM-DD');
     const endDate = moment(tripDetail.end_date).format('YYYY-MM-DD');
     var momentStartDate = moment(startDate);

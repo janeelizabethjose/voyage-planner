@@ -14,6 +14,7 @@ import TripDay from '../TripDay/tripDay';
 
 
 function TripDashboardForm(props) {
+    const [TripData, setTripData] = useState([]);
     const [open, setOpen] = useState(false);
     const node = useRef();
     const menuId = "main-menu";
@@ -34,7 +35,7 @@ function TripDashboardForm(props) {
                     <Menu open={open} setOpen={setOpen} id={menuId} />
                 </FocusLock>
             </div>
-            <Trip />
+            <Trip TripData={TripData} />
             <TripDay />
         </ThemeProvider >
     )

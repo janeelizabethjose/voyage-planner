@@ -62,7 +62,7 @@ function DayInfoForm(props) {
         <div style={modalStyle} className={classes.paper}>
             <h3 id="simple-modal-title">Add a Trip Day</h3>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Name" onChange={handleGetName} />
+                <TextField id="standard-basic" label="Name *" onChange={handleGetName} fullWidth />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
                         margin="normal"
@@ -73,6 +73,7 @@ function DayInfoForm(props) {
                         onChange={handleDateChange}
                         maxDate={props.TripMaxDate}
                         disablePast="true"
+                        fullWidth
                     />
                 </MuiPickersUtilsProvider>
                 <div className={classes.root}>
