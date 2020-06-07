@@ -59,10 +59,10 @@ function TripInfoForm(props) {
             tripDetails.Destinaton = props.Destination;
             props.insertTripInfo(tripDetails);
         } else {
-            if (props.Name == "" || props.Name == null || props.Name == undefined) {
+            if (props.Name === "" || props.Name === null || props.Name === undefined) {
                 props.validateName();
             }
-            if (props.Destination == "" || props.Destination == null || props.Destination == undefined) {
+            if (props.Destination === "" || props.Destination === null || props.Destination === undefined) {
                 props.validateDestination();
             }
         }

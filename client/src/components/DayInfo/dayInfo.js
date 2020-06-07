@@ -51,18 +51,30 @@ function DayInfoForm(props) {
     };
 
     const handleAddDay = () => {
-        props.insertDayInfo(textName);
+        if (props.TripName) {
+            props.insertDayInfo(props.TripName);
+        } else {
+            if (props.TripName === "" || props.TripName === null || props.TripName === undefined) {
+                props.validateTripName();
+            }
+        }
     };
 
     const handleGetName = (e) => {
-        textName = e.target.value;
+        props.updateTripName(e.target.value);
     }
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <h3 id="simple-modal-title">Add a Trip Day</h3>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Name *" onChange={handleGetName} fullWidth />
+                <TextField
+                    error={props.checkTripName}
+                    id="standard-basic"
+                    label="Name *"
+                    onChange={handleGetName}
+                    fullWidth
+                    helperText={props.checkTripName ? 'Enter trip name' : ''} />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
                         margin="normal"

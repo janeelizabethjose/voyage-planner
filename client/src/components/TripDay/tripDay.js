@@ -37,6 +37,9 @@ function TripDayForm(props) {
     const [TripMaxDate, setTripMaxDate] = useState(moment(props.location.state.detail.end_date).format('MM-DD-YYYY'));
     //const [TripEventDate, setTripEventDate] = useState(moment(props.location.state.detail.start_date).format('MM-DD-YYYY HH MM'));
 
+    const [TripName, setTripName] = useState();
+    const [checkTripName, setcheckTripName] = useState(false);
+
     const [eventStartTime, setEventStartTime] = useState(moment());
     const [eventEndTime, setEventEndTime] = useState(moment());
 
@@ -49,10 +52,18 @@ function TripDayForm(props) {
 
     const handleCloseModal = () => {
         setOpen(false);
+        setcheckTripName(false);
+        setTripName();
     }
 
     const handleOpenModal = () => {
         setOpen(true);
+    }
+    const handleupdateTripName = (data) => {
+        setTripName(data);
+    }
+    const handlevalidateTripName = () => {
+        setcheckTripName(true);
     }
 
     const handleUpdateTripDate = (metaData) => {
@@ -146,7 +157,6 @@ function TripDayForm(props) {
     };
 
     const handleTripDayEvent = (metaData) => {
-        console.log(metaData);
         if (metaData.id) {
             setTripDayId(metaData.id);
             setTripDayDetails(metaData);
@@ -226,6 +236,10 @@ function TripDayForm(props) {
                 showModal={open}
                 InitialDate={TripDate}
                 TripMaxDate={TripMaxDate}
+                TripName={TripName}
+                checkTripName={checkTripName}
+                updateTripName={handleupdateTripName}
+                validateTripName={handlevalidateTripName}
                 toggleModal={handleCloseModal}
                 insertDayInfo={handleinsertDayInfo}
                 updateTripDate={handleUpdateTripDate}
