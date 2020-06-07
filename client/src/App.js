@@ -40,7 +40,7 @@ function App() {
             <Route path="/trip">
               <TripForm showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
-            <Route path="/tripdashboard">
+            <Route path="/tripDashboard">
               <TripDashboard showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
             <Route path="/event">

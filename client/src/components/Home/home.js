@@ -197,7 +197,7 @@ function Home(props) {
                                             variant="body2"
                                             onClick={() => props.history.push(
                                                 {
-                                                    pathname: '/tripdashboard',
+                                                    pathname: '/tripDashboard',
                                                     state: { detail: row }
                                                 }
                                             )}

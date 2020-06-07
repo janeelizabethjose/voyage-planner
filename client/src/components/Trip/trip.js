@@ -35,10 +35,6 @@ function TripForm(props) {
 
     useOnClickOutside(node, () => setOpen(false));
 
-    useEffect(() => {
-        //getTripInformation();
-    }, []);
-
     const classes = useStyles();
     const GoBackButton = withRouter(({ history }) => (
         <IconButton onClick={() => history.goBack()}>
