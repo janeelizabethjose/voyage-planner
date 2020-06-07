@@ -25,7 +25,7 @@ let textName;
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
-        width: 400,
+        width: "50%",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -71,8 +71,9 @@ function DayInfoForm(props) {
                         format="dd-MM-yyyy"
                         value={props.InitialDate}
                         onChange={handleDateChange}
-                        maxDate={props.TripMaxDate}
                         disablePast="true"
+                        minDate={props.InitialDate}
+                        maxDate={props.TripMaxDate}
                         fullWidth
                     />
                 </MuiPickersUtilsProvider>

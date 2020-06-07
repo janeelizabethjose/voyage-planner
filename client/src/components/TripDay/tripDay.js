@@ -33,6 +33,13 @@ function TripDayForm(props) {
     const [TripDayEvents, setTripDayEvents] = useState([]);
     const [TripDate, setTripDate] = useState(moment(props.location.state.detail.start_date).format('MM-DD-YYYY'));
     const [TripMaxDate, setTripMaxDate] = useState(moment(props.location.state.detail.end_date).format('MM-DD-YYYY'));
+    //const [TripEventDate, setTripEventDate] = useState(moment(props.location.state.detail.start_date).format('MM-DD-YYYY HH MM'));
+
+    const [eventStartTime, setEventStartTime] = useState(moment());
+    const [eventEndTime, setEventEndTime] = useState(moment());
+
+    const [tripDayId, setTripDayId] = useState(0);
+    const [tripDayDetails, setTripDayDetails] = useState();
 
     useEffect(() => {
         getTripDayInformation();
@@ -56,6 +63,14 @@ function TripDayForm(props) {
 
     const handleCloseEventModal = () => {
         setOpenEvent(false);
+    }
+
+    const handleUpdateStartEventTime = (startTime) => {
+        setEventStartTime(startTime);
+    }
+
+    const handleUpdateEndEventTime = (endTime) => {
+        setEventEndTime(endTime);
     }
 
     const getTripDayInformation = (e) => {
@@ -99,15 +114,47 @@ function TripDayForm(props) {
             });
     };
 
-    const handleTripDayEvent = (metaData) => {
+    const handleInsertEventInfo = (metaData) => {
         const payload = {
-            "tripDayID": metaData,
+            "title": metaData.title,
+            "tripDayID": tripDayId,
+            "categoryID": metaData.categoryID,
+            "userID": localStorage.getItem("userID"),
+            "currencyID": metaData.currencyID,
+            "startTime": moment(eventStartTime).format("HH:mm:ss"),
+            "endTime": moment(eventEndTime).format("HH:mm:ss"),
+            "startLocation": metaData.startLocation,
+            "endLocation": metaData.endLocation,
+            "note": metaData.note,
+            "tag": metaData.tag,
+        }
+        axios.post(API_BASE_URL + 'createTripDayEvent', payload)
+            .then(function (response) {
+                if (response.status === 200) {
+                    handleCloseEventModal();
+                    handleTripDayEvent(tripDayId);
+                }
+                else {
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    const handleTripDayEvent = (metaData) => {
+        if (metaData.id) {
+            setTripDayId(metaData.id);
+            setTripDayDetails(metaData);
+        }
+        const payload = {
+            "tripDayID": metaData.id,
             "userID": localStorage.getItem("userID"),
         }
         axios.post(API_BASE_URL + 'getTripDayEventInfo', payload)
             .then(function (response) {
                 if (response.status === 200) {
-                    console.log(response);
                     setTripDayEvents(response.data.rows);
                 }
                 else {
@@ -136,7 +183,7 @@ function TripDayForm(props) {
                                 key={row.id}
                                 button
                                 // selected={dashboard.selectedTripDayId === tripDay.id}
-                                onClick={() => handleTripDayEvent(row.id)}
+                                onClick={() => handleTripDayEvent(row)}
                             >
                                 <ListItemText>{moment(row.trip_date).format('YYYY-MM-DD')}</ListItemText>
                                 <ListItemIcon>
@@ -150,15 +197,20 @@ function TripDayForm(props) {
                     <div>
                         <Grid container direction='row' justify='flex-start' alignItems='center' spacing={2}>
                             <Grid item>
-                                <Button
-                                    className={classes.button}
-                                    variant='contained'
-                                    color='primary'
-                                    size='medium'
-                                    onClick={() => handleOpenEventModal()}
-                                >
-                                    <Icon className={classes.buttonIcon}>add</Icon> New Event
-                                </Button>
+                                {tripDayId > 0 ?
+                                    <>
+                                        <span style={{ fontSize: "20px", paddingRight: "50px", paddingLeft: "10px", fontWeight: "bold" }}>{tripDayDetails && tripDayDetails.name} ({moment(tripDayDetails.trip_date).format('YYYY-MM-DD')})</span>
+                                        <Button
+                                            className={classes.button}
+                                            variant='contained'
+                                            color='primary'
+                                            size='medium'
+                                            onClick={() => handleOpenEventModal()}
+                                        >
+                                            <Icon className={classes.buttonIcon}>add</Icon> New Event
+                                        </Button>
+                                    </>
+                                    : null}
                             </Grid>
                         </Grid>
                     </div>
@@ -181,11 +233,12 @@ function TripDayForm(props) {
 
             <EventInfo
                 showModal={openEvent}
-                InitialDate={TripDate}
-                TripMaxDate={TripMaxDate}
+                eventStartTime={eventStartTime}
+                eventEndTime={eventEndTime}
                 toggleModal={handleCloseEventModal}
-                insertDayInfo={handleinsertDayInfo}
-                updateTripDate={handleUpdateTripDate}
+                insertTripEventInfo={handleInsertEventInfo}
+                updateStartEventTime={handleUpdateStartEventTime}
+                updateEndEventTime={handleUpdateEndEventTime}
             />
         </>
     )

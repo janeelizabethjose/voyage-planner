@@ -57,6 +57,28 @@ let tripController = {
         }).catch(error => {
             return res.status(500).json(error);
         })
+    },
+    createTripDayEvent(req, res, next) {
+        if (paramValidator.checkObject({
+            tripDayID: req.body.tripDayID,
+            userID: req.body.userID,
+            categoryID: req.body.categoryID,
+            title: req.body.title,
+        }) !== true) {
+            return res.status(500).json({ error: paramValidator.errorMessage });
+        }
+        tripModel.createTripDayEvent(req.body).then(response => {
+            var responseData = {
+                "rows": response
+            }
+            return res.status(200).json(responseData);
+        }).catch(error => {
+            return res.status(500).json(error);
+        })
     }
+
+
+
+
 };
 module.exports = tripController;

@@ -2,19 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from '../../global';
 import { theme } from '../Themes/theme';
-import './home.css';
 import TripInfo from '../TripInfo/tripInfo';
 
 import Header from '../Header/header';
 
-import { useOnClickOutside } from '../../hooks';
-import Burger from '../Burger/burger';
-import Menu from '../Menu/menu';
-import FocusLock from 'react-focus-lock';
+//import { useOnClickOutside } from '../../hooks';
+// import Burger from '../Burger/burger';
+// import Menu from '../Menu/menu';
+// import FocusLock from 'react-focus-lock';
 
 import Link from '@material-ui/core/Link';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import axios from 'axios';
 import { API_BASE_URL } from '../../constants/apiContants';
@@ -43,10 +41,6 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-function createData(name, startDate, endDate, destination, actions) {
-    return { name, startDate, endDate, destination, actions };
-}
-
 const useStyles = makeStyles({
     table: {
         minWidth: 800,
@@ -55,19 +49,19 @@ const useStyles = makeStyles({
 //table end
 
 function Home(props) {
-    const [open, setOpen] = useState(true);
+    // const [open, setOpen] = useState(true);
+    // const menuId = "main-menu";
+    //const node = useRef();
     const [openModal, setOpenModal] = useState(false);
-    const node = useRef();
-    const menuId = "main-menu";
     const [Trip, setTrip] = useState([]);
     const [userID, setUserID] = useState(0);
     const [startDate, setStartDate] = useState(moment().format('MM-DD-YYYY'));
     const [endDate, setEndDate] = useState(moment().format('MM-DD-YYYY'));
 
-    useOnClickOutside(node, () => setOpen(false));
-    //table start
+    //useOnClickOutside(node, () => setOpen(false));
+
     const classes = useStyles();
-    //table end
+
 
     useEffect(() => {
         getTripInformation();
@@ -140,13 +134,13 @@ function Home(props) {
             <Header />
 
             <>
-                <Burger></Burger>
+                {/* <Burger></Burger>
                 <div ref={node}>
                     <FocusLock disabled={!open}>
                         <Burger open={open} setOpen={setOpen} aria-controls={menuId} />
                         <Menu open={open} setOpen={setOpen} id={menuId} />
                     </FocusLock>
-                </div>
+                </div> */}
 
                 <div style={{ paddingTop: "150px", paddingLeft: "150px" }}>
                     <Button variant="contained" color="secondary" onClick={() => handleOpenModal()} style={{ marginLeft: "800px", marginBottom: "20px" }}>

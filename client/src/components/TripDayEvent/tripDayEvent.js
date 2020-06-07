@@ -1,26 +1,12 @@
-import React, { useState, useRef, useEffect, useSelector } from 'react';
-import { API_BASE_URL } from '../../constants/apiContants';
-import axios from 'axios';
+import React from 'react';
 import { withRouter } from "react-router-dom";
 import * as moment from 'moment';
 
-import { theme } from '../Themes/theme';
 import {
-    Button,
     Chip,
     createStyles,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
     Fab,
-    Grid,
-    Icon,
-    makeStyles,
-    Paper,
-    Theme,
-    Typography,
+    Typography, makeStyles, Icon, Paper, Grid
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
@@ -29,6 +15,9 @@ const useStyles = makeStyles((theme) =>
 );
 
 function TripDayEventForm(props) {
+
+    const classes = useStyles({});
+    console.log(props);
     const eventIcon = (category) => {
         if (category === 1) {
             return <Icon className={classes.icon} style={{ transform: "scale(2.8)" }}> directions_run</Icon>;
@@ -45,7 +34,6 @@ function TripDayEventForm(props) {
         }
     };
 
-    const classes = useStyles({});
     return (
         <div className={classes.eventWrapper} style={{ marginTop: "30px" }} >
             {props.TripDayEvents && props.TripDayEvents.map((row) => (
@@ -59,8 +47,8 @@ function TripDayEventForm(props) {
                                 <Typography variant='h5' component='h3'>
                                     <strong>{row.title}</strong>
                                 </Typography>
-                                <Typography variant='subtitle1'><strong>Start at: </strong> {moment(row.start_time).format("DD-MM-YYYY hh:mm A")}</Typography>
-                                <Typography variant='subtitle1'><strong>End at: </strong> {moment(row.end_time).format("DD-MM-YYYY hh:mm A")}</Typography>
+                                <Typography variant='subtitle1'><strong>Start at: </strong> {moment(row.start_time, "HH:mm:ss").format("hh:mm A")}</Typography>
+                                <Typography variant='subtitle1'><strong>End at: </strong> {moment(row.end_time, "HH:mm:ss").format("hh:mm A")}</Typography>
                                 <Typography variant='subtitle1'><strong>From: </strong>{row.start_location}</Typography>
                                 <Typography variant='subtitle1'><strong>To: </strong>{row.end_location}</Typography>
                                 <Typography variant='subtitle1'>

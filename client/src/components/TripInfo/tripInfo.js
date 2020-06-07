@@ -25,7 +25,7 @@ let textName, textDestination;
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
-        width: 400,
+        width: "50%",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -73,8 +73,8 @@ function TripInfoForm(props) {
         <div style={modalStyle} className={classes.paper}>
             <h3 id="simple-modal-title">Add a Trip</h3>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Name" onChange={handleGetName} />
-                <TextField id="standard-basic" label="Destination" onChange={handleGetDestination} />
+                <TextField id="standard-basic" label="Name *" onChange={handleGetName} fullWidth />
+                <TextField id="standard-basic" label="Destination *" onChange={handleGetDestination} fullWidth />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
                         margin="normal"
@@ -84,6 +84,7 @@ function TripInfoForm(props) {
                         value={props.InitialStartDate}
                         onChange={handleStartDateChange}
                         disablePast="true"
+                        fullWidth
                     />
                 </MuiPickersUtilsProvider>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -96,6 +97,7 @@ function TripInfoForm(props) {
                         minDate={props.InitialStartDate}
                         onChange={handleEndDateChange}
                         disablePast="true"
+                        fullWidth
                     />
                 </MuiPickersUtilsProvider>
                 <div className={classes.root}>

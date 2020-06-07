@@ -25,10 +25,8 @@ const useStyles = makeStyles((theme) => ({
 function TripForm(props) {
     const [open, setOpen] = useState(false);
     const node = useRef();
-    const menuId = "main-menu";
 
-    const [tripDetail, setTripDetail] = useState(props.location.state.detail);
-    console.log(props);
+    const [tripDetail, setTripDetail] = useState(props.history.location.state.detail);
     const startDate = moment(tripDetail.start_date).format('YYYY-MM-DD');
     const endDate = moment(tripDetail.end_date).format('YYYY-MM-DD');
     var momentStartDate = moment(startDate);

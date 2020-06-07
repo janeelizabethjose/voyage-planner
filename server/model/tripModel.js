@@ -93,5 +93,28 @@ var tripModel = {
             console.log(e);
         }
     },
+    createTripDayEvent: function (params) {
+        try {
+            return new Promise((resolve, reject) => {
+
+                let insertstmt = `INSERT INTO events(title,trip_day_id,category_id,user_id,
+                    currency_id,start_time,end_time,start_location,end_location,note,tag,cost) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`;
+                let insertValue = [params.title, params.tripDayID, params.categoryID, params.userID,
+                params.currencyID, params.startTime, params.endTime, params.startLocation, params.endLocation,
+                params.note, params.tag, params.cost];
+
+                db.query(insertstmt, insertValue, (error, rows) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(rows.insertId);
+                    }
+                });
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    },
 };
 module.exports = tripModel;
