@@ -8,13 +8,13 @@ User (Basic flow only)
 -	Registration
 
 Trip Plan
--	Create Trip
--	View Trip (in dashboard)
--	Add days of the trips
+-	Create trips
+-	View trips (in dashboard)
+-	Add days of the trip
 -	View days of the trip
 -	Add events of the particular trip day
 -	View events of the particular trip day
--	Delete Trip Plan (Which will remove the entire trip along with its days and events)
+-	Delete trip plan (Which will remove the entire trip along with its days and events)
 
 
 Prerequisites:
@@ -22,7 +22,7 @@ Prerequisites:
 - MySQL
 
 Database Setup:
-Please create the db using voyageplanner.sql file
+Create the db by importing voyageplanner.sql file (Path: voyage-planner/database/voyageplanner.sql)
 
 Installation:
 Clone Repository: git clone git@github.com:janeelizabethjose/voyage-planner.git
