@@ -3,10 +3,7 @@ import { withRouter } from "react-router-dom";
 import * as moment from 'moment';
 
 import {
-    Chip,
-    createStyles,
-    Fab,
-    Typography, makeStyles, Icon, Paper, Grid
+    Chip, createStyles, Typography, makeStyles, Icon, Paper, Grid
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
@@ -51,7 +48,7 @@ function TripDayEventForm(props) {
                                 <Typography variant='subtitle1'><strong>From: </strong>{row.start_location}</Typography>
                                 <Typography variant='subtitle1'><strong>To: </strong>{row.end_location}</Typography>
                                 <Typography variant='subtitle1'>
-                                    <strong> Price: </strong>{row.cost} ({row.currency_code})
+                                    <strong> Cost: </strong>{row.cost} ({row.currency_code})
                                 </Typography>
                             </Grid>
                             <Grid container direction='row' alignItems='center'>
@@ -60,20 +57,6 @@ function TripDayEventForm(props) {
                                     <Chip key={`${t}-${index}`} size='small' label={t} className={classes.chip} color='primary' />
                                 ))}
                             </Grid>
-                        </Grid>
-                        <Grid item xs={2} container direction='row' justify='flex-end' alignItems='center'>
-                            <Fab color='primary' size='small' aria-label='edit' className={classes.fab}>
-                                <Icon>edit</Icon>
-                            </Fab>
-                            <Fab
-                                color='secondary'
-                                size='small'
-                                aria-label='delete'
-                                className={classes.fab}
-                            // onClick={() => setDialogOpen(true)}
-                            >
-                                <Icon>delete</Icon>
-                            </Fab>
                         </Grid>
                     </Grid>
                 </Paper >

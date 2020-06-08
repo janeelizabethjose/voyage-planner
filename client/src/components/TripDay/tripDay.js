@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createStyles, Divider, Icon, List, ListItem, ListItemIcon, ListItemText, makeStyles, Paper, Theme, Button, Grid } from '@material-ui/core';
+import { createStyles, Divider, Icon, List, ListItem, ListItemIcon, ListItemText, makeStyles, Paper, Theme, Button, Grid, Tooltip } from '@material-ui/core';
 import { withRouter } from "react-router-dom";
 
 import axios from 'axios';
@@ -137,6 +137,7 @@ function TripDayForm(props) {
             "endLocation": metaData.endLocation,
             "note": metaData.note,
             "tag": metaData.tag,
+            "cost": parseInt(metaData.cost)
         }
         axios.post(API_BASE_URL + 'createTripDayEvent', payload)
             .then(function (response) {
@@ -183,25 +184,28 @@ function TripDayForm(props) {
             <div className={classes.root} style={{ marginTop: "10px" }}>
                 <Paper style={{ width: "200px" }}>
                     <List>
-                        <ListItem button key='New Day' onClick={() => handleOpenModal()}>
-                            <ListItemIcon>
-                                <Icon>add</Icon>
-                            </ListItemIcon>
-                            <ListItemText primary='New Day' />
-                        </ListItem>
+                        <Tooltip title="Create a new day" aria-label="click">
+                            <ListItem button key='New Day' onClick={() => handleOpenModal()}>
+                                <ListItemIcon>
+                                    <Icon>add</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary='New Day' />
+                            </ListItem>
+                        </Tooltip>
                         <Divider />
                         {TripDay && TripDay.map((row) => (
-                            <ListItem
-                                key={row.id}
-                                button
-                                // selected={row.id}
-                                onClick={() => handleTripDayEvent(row)}
-                            >
-                                <ListItemText>{moment(row.trip_date).format('YYYY-MM-DD')}</ListItemText>
-                                <ListItemIcon>
-                                    <Icon>chevron_right</Icon>
-                                </ListItemIcon>
-                            </ListItem>
+                            <Tooltip title="Click here to view the event details" aria-label="click">
+                                <ListItem
+                                    key={row.id}
+                                    button
+                                    onClick={() => handleTripDayEvent(row)}
+                                >
+                                    <ListItemText>{moment(row.trip_date).format('YYYY-MM-DD')}</ListItemText>
+                                    <ListItemIcon>
+                                        <Icon>chevron_right</Icon>
+                                    </ListItemIcon>
+                                </ListItem>
+                            </Tooltip>
                         ))}
                     </List>
                 </Paper>
@@ -211,16 +215,20 @@ function TripDayForm(props) {
                             <Grid item>
                                 {tripDayId > 0 ?
                                     <>
-                                        <span style={{ fontSize: "20px", paddingRight: "50px", paddingLeft: "10px", fontWeight: "bold" }}>{tripDayDetails && tripDayDetails.name} ({moment(tripDayDetails.trip_date).format('YYYY-MM-DD')})</span>
-                                        <Button
-                                            className={classes.button}
-                                            variant='contained'
-                                            color='primary'
-                                            size='medium'
-                                            onClick={() => handleOpenEventModal()}
-                                        >
-                                            <Icon className={classes.buttonIcon}>add</Icon> New Event
+                                        <span style={{ fontSize: "20px", paddingRight: "50px", paddingLeft: "10px", fontWeight: "bold" }}>
+                                            {tripDayDetails && tripDayDetails.name} ({moment(tripDayDetails.trip_date).format('YYYY-MM-DD')})
+                                        </span>
+                                        <Tooltip title="Create a new event" aria-label="click">
+                                            <Button
+                                                className={classes.button}
+                                                variant='contained'
+                                                color='primary'
+                                                size='medium'
+                                                onClick={() => handleOpenEventModal()}
+                                            >
+                                                <Icon className={classes.buttonIcon}>add</Icon> New Event
                                         </Button>
+                                        </Tooltip>
                                     </>
                                     : null}
                             </Grid>

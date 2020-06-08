@@ -12,5 +12,6 @@ router.post('/createTrip', tripController.createTrip);
 router.post('/createTripDay', tripController.createTripDay);
 router.post('/getTripDayEventInfo', tripController.getTripDayEventInfo);
 router.post('/createTripDayEvent', tripController.createTripDayEvent);
+router.post('/deleteTripPlan', tripController.deleteTripPlan);
 
 module.exports = router;

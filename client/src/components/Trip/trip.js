@@ -4,8 +4,8 @@ import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Grid, IconButton, Icon, Typography, Fab } from '@material-ui/core';
-import Header from '../Header/header';
+import { Paper, Grid, IconButton, Icon, Typography, Fab, Tooltip } from '@material-ui/core';
+import FormDeleteTrip from '../FormDeleteTrip/formDeleteTrip';
 
 import { theme } from '../Themes/theme';
 import * as moment from 'moment';
@@ -41,6 +41,42 @@ function TripForm(props) {
             <Icon>chevron_left</Icon>
         </IconButton>
     ));
+
+    const handleOpenModal = () => {
+        setOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setOpen(false);
+    }
+
+    const handleDeleteTripPlan = () => {
+
+        if (tripDetail.id) {
+            console.log(tripDetail.id);
+            const payload = {
+                "tripID": tripDetail.id,
+            }
+            axios.post(API_BASE_URL + 'deleteTripPlan', payload)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        console.log(response);
+                        handleCloseModal();
+                        props.history.push(
+                            { pathname: '/home' }
+                        )
+                    }
+                    else {
+                        console.log(response);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+    }
+
     return (
         <div className={classes.root} style={{ paddingTop: "120px" }}>
             <Paper elevation={3}>
@@ -62,12 +98,19 @@ function TripForm(props) {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Fab color='primary' size='small' aria-label='edit' className={classes.fab}>
-                            <Icon>edit</Icon>
-                        </Fab>
+                        <Tooltip title="Delete Trip" aria-label="delete">
+                            <Fab color='secondary' size='small' aria-label='delete' className={classes.fab} style={{ marginRight: "20px" }}>
+                                <Icon onClick={() => handleOpenModal()}>delete</Icon>
+                            </Fab>
+                        </Tooltip>
                     </Grid>
                 </Grid>
             </Paper>
+            <FormDeleteTrip
+                showModal={open}
+                toggleModal={handleCloseModal}
+                deleteTripPlan={handleDeleteTripPlan}
+            />
         </div>
     )
 }

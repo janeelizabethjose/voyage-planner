@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Tooltip } from '@material-ui/core';
 import './header.css';
 
 function Header(props) {
@@ -18,7 +19,9 @@ function Header(props) {
         <div className="topnav">
             <span className="header">VOYAGE PLANNER</span>
             <div className="topnav-right">
-                <button onClick={() => handleLogout()}><ExitToAppIcon /></button>
+                <Tooltip title="Logout" aria-label="click">
+                    <button onClick={() => handleLogout()}><ExitToAppIcon /></button>
+                </Tooltip>
             </div>
         </div>
     )

@@ -74,7 +74,7 @@ function Home(props) {
     }, [userID]);
 
     const getTripInformation = (e) => {
-        props.showError(null);
+        //props.showError(null);
         const payload = {
             "userID": localStorage.getItem("userID"),
         }
@@ -84,10 +84,12 @@ function Home(props) {
                     setTrip(response.data.rows);
                 }
                 else if (response.status === 204) {
-                    props.showError("Something went wrong!");
+                    console.log("Something went wrong!");
+                    //props.showError("Something went wrong!");
                 }
                 else {
-                    props.showError("Something went wrong!");
+                    console.log("Something went wrong!");
+                    //props.showError("Something went wrong!");
                 }
             })
             .catch(function (error) {

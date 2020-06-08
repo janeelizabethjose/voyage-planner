@@ -32,7 +32,7 @@ function RegistrationForm(props) {
                             ...prevState,
                             'successMessage': 'Registration successful. Redirecting to home page..'
                         }))
-                        redirectToHome();
+                        redirectToLogin();
                         props.showError(null)
                     } else {
                         props.showError("Some error ocurred!");

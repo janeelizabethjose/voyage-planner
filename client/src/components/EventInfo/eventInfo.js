@@ -179,7 +179,7 @@ function EventInfoForm(props) {
                             }}>
                             {currency.map(c => (
                                 <MenuItem key={c.id} value={c.id}>
-                                    {c.code}
+                                    {c.code} - {c.name}
                                 </MenuItem>
                             ))}
                         </TextField>

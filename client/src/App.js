@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header/header';
 import LoginForm from './components/Login/login';
@@ -19,6 +19,18 @@ function App() {
   const [title, updateTitle] = useState('Voyage Planner');
   const [errorMessage, updateErrorMessage] = useState(null);
 
+  useEffect(() => {
+    isAuthenticatedUser();
+  }, []);
+
+  const isAuthenticatedUser = () => {
+    if (localStorage.getItem('userID')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
     <Router>
       <div className="App body">
@@ -34,14 +46,12 @@ function App() {
             <Route path="/login">
               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
-            <Route path="/home">
-              <Home showError={updateErrorMessage} />
+            <Route path="/home" render={props => isAuthenticatedUser() ? (<Home {...props} />) : ''}>
             </Route>
             <Route path="/trip">
               <TripForm showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
-            <Route path="/tripDashboard">
-              <TripDashboard showError={updateErrorMessage} updateTitle={updateTitle} />
+            <Route path="/tripDashboard" render={props => isAuthenticatedUser() ? (<TripDashboard {...props} />) : ''}>
             </Route>
             <Route path="/event">
               <TripDayEvent showError={updateErrorMessage} updateTitle={updateTitle} />

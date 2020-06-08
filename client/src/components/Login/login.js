@@ -39,14 +39,14 @@ function LoginForm(props) {
                         redirectToHome();
                         props.showError(null)
                     } else {
-                        props.showError("Username does not exists!");
+                        props.showError("Username does not exist!");
                     }
                 }
                 else if (response.status === 204) {
                     props.showError("Username and password do not match!");
                 }
                 else {
-                    props.showError("Username does not exists!");
+                    props.showError("Username does not exist!");
                 }
             })
             .catch(function (error) {
@@ -109,7 +109,7 @@ function LoginForm(props) {
                     {state.successMessage}
                 </div>
                 <div className="registerMessage">
-                    <span>Dont have an account? </span>
+                    <span>Don't have an account? </span>
                     <span className="loginText" onClick={() => redirectToRegister()}>Register</span>
                 </div>
             </div>
