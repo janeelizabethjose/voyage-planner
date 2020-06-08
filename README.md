@@ -2,7 +2,7 @@
 
 Travel planner web application using ReactJS, NodeJS and MySQL.
 
-## Scenario
+## Scenario:
 Make a system that allows users to put together their own little travel itinerary and keep track of the airline / hotel arrangements, points of interest, budget and schedule.
 
 ## Features:
@@ -19,7 +19,7 @@ Trip Plan
 -	View events of a particular trip day
 -	Delete trip plan (Which will remove the entire trip along with its days and events)
 
-## Tech Stack
+## Tech Stack:
 - NodeJS
 - ReactJS
 - MySQL
@@ -46,5 +46,5 @@ Clone Repository: git clone https://github.com/janeelizabethjose/voyage-planner.
 
 After completion of the instalation and execution of npm start, default browser will automatically open the application else hit the following URL in your browser: http://localhost:3000
 
-## Screenshots
+## Screens:
 
