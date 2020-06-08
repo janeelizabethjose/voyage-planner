@@ -163,7 +163,7 @@ function Home(props) {
                 </div> */}
 
                 <div style={{ paddingTop: "150px" }}>
-                    <Button variant="contained" color="secondary" onClick={() => handleOpenModal()} style={{ marginLeft: "800px", marginBottom: "20px" }}>
+                    <Button variant="contained" color="primary" onClick={() => handleOpenModal()} style={{ marginLeft: "800px", marginBottom: "20px" }}>
                         Add a New Trtip
                     </Button>
                     <TableContainer component={Paper}>

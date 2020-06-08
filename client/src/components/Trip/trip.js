@@ -86,7 +86,7 @@ function TripForm(props) {
                                 {tripDetail.destination}
                             </Typography>
                             <Typography variant='subtitle1'>
-                                {endDate} ~ {endDate} ( {dateDiff} day(s) )
+                                {startDate} ~ {endDate} ( {dateDiff} day(s) )
                                 </Typography>
                             <Typography variant='body2'>
                                 {tripDetail.name}

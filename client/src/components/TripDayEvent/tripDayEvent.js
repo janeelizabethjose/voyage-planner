@@ -50,6 +50,7 @@ function TripDayEventForm(props) {
                                 <Typography variant='subtitle1'>
                                     <strong> Cost: </strong>{row.cost} ({row.currency_code})
                                 </Typography>
+                                <Typography variant='subtitle1'><strong> Notes: </strong>{row.note}</Typography>
                             </Grid>
                             <Grid container direction='row' alignItems='center'>
                                 <Icon>label</Icon>
