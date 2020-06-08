@@ -12,8 +12,8 @@ Trip Plan
 -	View trips (in dashboard)
 -	Add days of the trip
 -	View days of the trip
--	Add events of the particular trip day
--	View events of the particular trip day
+-	Add events to a particular trip day
+-	View events of a particular trip day
 -	Delete trip plan (Which will remove the entire trip along with its days and events)
 
 
@@ -27,11 +27,11 @@ Create the db by importing voyageplanner.sql file (Path: voyage-planner/database
 Installation:
 Clone Repository: git clone git@github.com:janeelizabethjose/voyage-planner.git
 
-Server(Node):
+Server Setup(NodeJS):
 - cd server/
 - npm install
 
-Client(React):
+Client Setup(ReactJS):
 - cd client/
 - npm install
 
