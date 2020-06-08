@@ -1,7 +1,8 @@
-# voyage-planner
+# Voyage Planner
+
 Travel planner web application using ReactJS, NodeJS and MySQL.
 
-Features:
+## Features:
 
 User (Basic flow only)
 -	Login 
@@ -17,22 +18,22 @@ Trip Plan
 -	Delete trip plan (Which will remove the entire trip along with its days and events)
 
 
-Prerequisites:
+## Prerequisites:
 - NodeJS
 - MySQL
 
-Database Setup:
+## Database Setup:
 Create the db by importing voyageplanner.sql file (Path: voyage-planner/database/voyageplanner.sql)
 
-Installation and Run:
+## Installation and Run:
 Clone Repository: git clone git@github.com:janeelizabethjose/voyage-planner.git
 
-Server Setup(NodeJS- Port:5000):
+## Server Setup(NodeJS- Port:5000):
 - cd server/
 - npm install
 - npm start
 
-Client Setup(ReactJS- Port:3000):
+## Client Setup(ReactJS- Port:3000):
 - cd client/
 - npm install
 - npm start
