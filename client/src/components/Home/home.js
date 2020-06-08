@@ -1,22 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from '../../global';
 import { theme } from '../Themes/theme';
 import TripInfo from '../TripInfo/tripInfo';
 
 import Header from '../Header/header';
-
-//import { useOnClickOutside } from '../../hooks';
-// import Burger from '../Burger/burger';
-// import Menu from '../Menu/menu';
-// import FocusLock from 'react-focus-lock';
 
 import Link from '@material-ui/core/Link';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import axios from 'axios';
 import { API_BASE_URL } from '../../constants/apiContants';
-import { Route, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 //table start
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -49,9 +43,6 @@ const useStyles = makeStyles({
 //table end
 
 function Home(props) {
-    // const [open, setOpen] = useState(true);
-    // const menuId = "main-menu";
-    //const node = useRef();
     const [openModal, setOpenModal] = useState(false);
     const [Trip, setTrip] = useState([]);
     const [userID, setUserID] = useState(0);
@@ -63,11 +54,7 @@ function Home(props) {
     const [Name, setName] = useState();
     const [Destination, setDestination] = useState();
 
-
-    //useOnClickOutside(node, () => setOpen(false));
-
     const classes = useStyles();
-
 
     useEffect(() => {
         getTripInformation();

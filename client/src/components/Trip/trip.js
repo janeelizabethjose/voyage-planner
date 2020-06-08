@@ -1,17 +1,14 @@
-import React, { useState, useRef, useEffect, useSelector } from 'react';
+import React, { useState, useRef } from 'react';
 import { API_BASE_URL } from '../../constants/apiContants';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
-import { ThemeProvider } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid, IconButton, Icon, Typography, Fab, Tooltip } from '@material-ui/core';
 import FormDeleteTrip from '../FormDeleteTrip/formDeleteTrip';
 
-import { theme } from '../Themes/theme';
 import * as moment from 'moment';
 
 import { useOnClickOutside } from '../../hooks';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Header from './components/Header/header';
 import LoginForm from './components/Login/login';
 import RegistrationForm from './components/Registration/registration';
 import Home from './components/Home/home';

@@ -8,9 +8,6 @@ import './header.css';
 function Header(props) {
 
     const handleLogout = (e) => {
-        console.log('hete');
-        //setIsLoggedIn(false);
-
         localStorage.clear("userID");
         localStorage.clear("email");
         localStorage.getItem('userID');

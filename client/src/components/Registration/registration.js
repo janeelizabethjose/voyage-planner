@@ -47,10 +47,6 @@ function RegistrationForm(props) {
         }
 
     }
-    const redirectToHome = () => {
-        props.updateTitle('Voyage Planner')
-        props.history.push('/home');
-    }
     const redirectToLogin = () => {
         props.updateTitle('Voyage Planner')
         props.history.push('/login');

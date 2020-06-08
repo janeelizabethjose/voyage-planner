@@ -45,7 +45,7 @@ function FormDeleteTrip(props) {
         <div style={modalStyle} className={classes.paper}>
             <h3 id="simple-modal-title">Delete Trip</h3>
             <form className={classes.root} noValidate autoComplete="off">
-                <label>Do you want to delete this trip and its corresponding details?</label>
+                <label>Do you want to delete this trip and it's corresponding details?</label>
                 <div className={classes.root}>
                     <Button variant="contained" color="secondary" onClick={handleDeleteTrip}>
                         Confirm

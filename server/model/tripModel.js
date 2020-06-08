@@ -135,7 +135,6 @@ var tripModel = {
                             }
                             else {
                                 resolve(rows);
-                                console.log(rows);
                             }
                         });
                     }
