@@ -29,7 +29,8 @@ Trip Plan
 - MySQL
 
 ## Database Setup:
-Create the db by importing voyageplanner.sql file (Path: voyage-planner/database/voyageplanner.sql)
+- Create the database by importing voyageplanner.sql file (Path: voyage-planner/database/voyageplanner.sql)
+- Update the config.json file based on your database server configuration (Path: voyage-planner/server/config/config.json)
 
 ## Installation and Run:
 Clone Repository: git clone https://github.com/janeelizabethjose/voyage-planner.git
@@ -47,4 +48,19 @@ Clone Repository: git clone https://github.com/janeelizabethjose/voyage-planner.
 After completion of the instalation and execution of npm start, default browser will automatically open the application else hit the following URL in your browser: http://localhost:3000
 
 ## Screens:
+
+![1](https://user-images.githubusercontent.com/10877000/84056105-56ae6d00-a9e8-11ea-9dc1-201cd06ea376.png)
+
+![2](https://user-images.githubusercontent.com/10877000/84056113-59a95d80-a9e8-11ea-8ea1-3d86eb401642.png)
+
+![3](https://user-images.githubusercontent.com/10877000/84056120-5ca44e00-a9e8-11ea-9afb-30369f545a45.png)
+
+![4](https://user-images.githubusercontent.com/10877000/84056126-5e6e1180-a9e8-11ea-9787-a2108bfa1598.png)
+
+![5](https://user-images.githubusercontent.com/10877000/84056134-61690200-a9e8-11ea-9a51-12918bff958d.png)
+
+![6](https://user-images.githubusercontent.com/10877000/84056137-6332c580-a9e8-11ea-92d4-580b3a5808ec.png)
+
+![7](https://user-images.githubusercontent.com/10877000/84056145-65951f80-a9e8-11ea-9cad-4adeb29c7ae2.png)
+
 
