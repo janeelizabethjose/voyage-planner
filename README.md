@@ -17,6 +17,11 @@ Trip Plan
 -	View events of a particular trip day
 -	Delete trip plan (Which will remove the entire trip along with its days and events)
 
+## Tech Stack
+
+- NodeJS
+- ReactJS
+- MySQL
 
 ## Prerequisites:
 - NodeJS
@@ -29,14 +34,14 @@ Create the db by importing voyageplanner.sql file (Path: voyage-planner/database
 Clone Repository: git clone https://github.com/janeelizabethjose/voyage-planner.git
 
 ## Server Setup(NodeJS- Port:5000):
-- cd server/
+- cd voyage-planner/server/
 - npm install
 - npm start
 
 ## Client Setup(ReactJS- Port:3000):
-- cd client/
+- cd voyage-planner/client/
 - npm install
 - npm start
 
-After completing instalation and npm start, browser will automatically open the application else hit the following URL in your browser: http://localhost:3000
+After completion of the instalation and execution of npm start, default browser will automatically open the application else hit the following URL in your browser: http://localhost:3000
 
