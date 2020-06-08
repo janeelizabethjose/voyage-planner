@@ -43,6 +43,68 @@ function TripDayForm(props) {
     const [tripDayId, setTripDayId] = useState(0);
     const [tripDayDetails, setTripDayDetails] = useState();
 
+    // START
+    const [Title, setTitle] = useState();
+    const [checkTitle, setCheckTitle] = useState(false);
+
+    const handleUpdateTitle = (data) => {
+        setTitle(data);
+    }
+    const handleValidateTitle = () => {
+        setCheckTitle(true);
+    }
+
+    const [Cost, setCost] = useState();
+    const [checkCost, setCheckCost] = useState(false);
+
+    const handleUpdateCost = (data) => {
+        setCost(data);
+    }
+    const handleValidateCost = () => {
+        setCheckCost(true);
+    }
+
+    const [Category, setCategory] = useState();
+    const [checkCategory, setCheckCategory] = useState(false);
+
+    const handleUpdateCategory = (data) => {
+        setCategory(data);
+    }
+    const handleValidateCategory = () => {
+        setCheckCategory(true);
+    }
+
+    const [Currency, setCurrency] = useState();
+    const [checkCurrency, setCheckCurrency] = useState(false);
+
+    const handleUpdateCurrency = (data) => {
+        setCurrency(data);
+    }
+    const handleValidateCurrency = () => {
+        setCheckCurrency(true);
+    }
+
+    const [StartLocation, setStartLocation] = useState();
+    const [checkStartLocation, setCheckStartLocation] = useState(false);
+
+    const handleUpdateStartLocation = (data) => {
+        setStartLocation(data);
+    }
+    const handleValidateStartLocation = () => {
+        setCheckStartLocation(true);
+    }
+
+    const [EndLocation, setEndLocation] = useState();
+    const [checkEndLocation, setCheckEndLocation] = useState(false);
+
+    const handleUpdateEndLocation = (data) => {
+        setEndLocation(data);
+    }
+    const handleValidateEndLocation = () => {
+        setCheckEndLocation(true);
+    }
+
+
     useEffect(() => {
         getTripDayInformation();
     }, []);
@@ -73,6 +135,18 @@ function TripDayForm(props) {
 
     const handleCloseEventModal = () => {
         setOpenEvent(false);
+        setCheckTitle(false);
+        setTitle();
+        setCheckCost(false);
+        setCost();
+        setCheckCategory(false);
+        setCategory();
+        setCheckCurrency(false);
+        setCurrency();
+        setCheckStartLocation(false);
+        setStartLocation();
+        setCheckEndLocation(false);
+        setEndLocation();
     }
 
     const handleUpdateStartEventTime = (startTime) => {
@@ -256,6 +330,30 @@ function TripDayForm(props) {
                 showModal={openEvent}
                 eventStartTime={eventStartTime}
                 eventEndTime={eventEndTime}
+                Title={Title}
+                checkTitle={checkTitle}
+                updateTitle={handleUpdateTitle}
+                validateTitle={handleValidateTitle}
+                Cost={Cost}
+                checkCost={checkCost}
+                updateCost={handleUpdateCost}
+                validateCost={handleValidateCost}
+                Category={Category}
+                checkCategory={checkCategory}
+                updateCategory={handleUpdateCategory}
+                validateCategory={handleValidateCategory}
+                Currency={Currency}
+                checkCurrency={checkCurrency}
+                updateCurrency={handleUpdateCurrency}
+                validateCurrency={handleValidateCurrency}
+                StartLocation={StartLocation}
+                checkStartLocation={checkStartLocation}
+                updateStartLocation={handleUpdateStartLocation}
+                validateStartLocation={handleValidateStartLocation}
+                EndLocation={EndLocation}
+                checkEndLocation={checkEndLocation}
+                updateEndLocation={handleUpdateEndLocation}
+                validateEndLocation={handleValidateEndLocation}
                 toggleModal={handleCloseEventModal}
                 insertTripEventInfo={handleInsertEventInfo}
                 updateStartEventTime={handleUpdateStartEventTime}

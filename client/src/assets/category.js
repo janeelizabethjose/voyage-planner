@@ -1,5 +1,6 @@
 
 export const category = [
+    { id: 0, name: 'Choose Category', icon: '' },
     { id: 1, name: 'Activity', icon: 'directions_run' },
     { id: 2, name: 'Transportation', icon: 'directions_bus' },
     { id: 3, name: 'Info', icon: 'info' },

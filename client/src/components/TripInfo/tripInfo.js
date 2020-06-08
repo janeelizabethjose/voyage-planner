@@ -82,7 +82,6 @@ function TripInfoForm(props) {
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField
                     error={props.checkName}
-                    helperText="Please enter name"
                     id="standard-basic"
                     label="Name *"
                     onChange={handleGetName}

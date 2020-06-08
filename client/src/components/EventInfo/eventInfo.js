@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EventInfoForm(props) {
-
     const classes = useStyles();
     const [modalStyle] = useState(getModalStyle);
 
@@ -55,40 +54,68 @@ function EventInfoForm(props) {
     };
 
     const handleAddEvent = () => {
-        let eventDetails = {}
-        eventDetails.title = txtTitle;
-        eventDetails.categoryID = intCategoryID;
-        eventDetails.startLocation = txtStartLocation;
-        eventDetails.endLocation = txtEndLocation;
-        eventDetails.cost = intCost;
-        eventDetails.currencyID = intCurrencyID;
-        eventDetails.note = txtNote;
-        eventDetails.tag = txtTag;
-        props.insertTripEventInfo(eventDetails);
+        if (
+            props.Title &&
+            props.Cost &&
+            props.Category &&
+            props.Currency &&
+            props.StartLocation &&
+            props.EndLocation
+        ) {
+            let eventDetails = {}
+            eventDetails.title = props.Title;
+            eventDetails.categoryID = props.Category;
+            eventDetails.startLocation = props.StartLocation;
+            eventDetails.endLocation = props.EndLocation;
+            eventDetails.cost = props.Cost;
+            eventDetails.currencyID = props.Currency;
+            eventDetails.note = txtNote;
+            eventDetails.tag = txtTag;
+            props.insertTripEventInfo(eventDetails);
+        } else {
+            if (props.Title === "" || props.Title === null || props.Title === undefined) {
+                props.validateTitle();
+            }
+            if (props.Cost === "" || props.Cost === null || props.Cost === undefined) {
+                props.validateCost();
+            }
+            if (props.Category === "" || props.Category === null || props.Category === undefined || props.Category < 1) {
+                props.validateCategory();
+            }
+            if (props.Currency === "" || props.Currency === null || props.Currency === undefined || props.Currency < 1) {
+                props.validateCurrency();
+            }
+            if (props.StartLocation === "" || props.StartLocation === null || props.StartLocation === undefined) {
+                props.validateStartLocation();
+            }
+            if (props.EndLocation === "" || props.EndLocation === null || props.EndLocation === undefined) {
+                props.validateEndLocation();
+            }
+        }
     };
 
     const handleGetTitle = (e) => {
-        txtTitle = e.target.value;
+        props.updateTitle(e.target.value);
     }
 
     const handleGetCategory = (e) => {
-        intCategoryID = e.target.value;
+        props.updateCategory(e.target.value);
     }
 
     const handleGetStartLocation = (e) => {
-        txtStartLocation = e.target.value;
+        props.updateStartLocation(e.target.value);
     }
 
     const handleGetEndLocation = (e) => {
-        txtEndLocation = e.target.value;
+        props.updateEndLocation(e.target.value);
     }
 
     const handleGetCost = (e) => {
-        intCost = e.target.value;
+        props.updateCost(e.target.value);
     }
 
     const handleGetCurrency = (e) => {
-        intCurrencyID = e.target.value;
+        props.updateCurrency(e.target.value);
     }
 
     const handleGetNote = (e) => {
@@ -103,7 +130,14 @@ function EventInfoForm(props) {
         <div style={modalStyle} className={classes.paper}>
             <h4 id="simple-modal-title">Add a Trip Event</h4>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Title *" onChange={handleGetTitle} fullWidth />
+                <TextField
+                    id="standard-basic"
+                    label="Title *"
+                    onChange={handleGetTitle}
+                    fullWidth
+                    helperText={props.checkTitle ? 'Enter Title' : ''}
+                    error={props.checkTitle}
+                />
 
                 <TextField
                     select
@@ -111,6 +145,8 @@ function EventInfoForm(props) {
                     name='category_id'
                     onChange={handleGetCategory}
                     fullWidth
+                    defaultValue={0}
+                    error={props.checkCategory}
                     SelectProps={{
                         MenuProps: {
                             className: classes.menu,
@@ -155,15 +191,37 @@ function EventInfoForm(props) {
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <TextField id="standard-basic" label="Start Location *" onChange={handleGetStartLocation} fullWidth />
+                        <TextField
+                            id="standard-basic"
+                            label="Start Location *"
+                            onChange={handleGetStartLocation}
+                            fullWidth
+                            helperText={props.checkStartLocation ? 'Enter Start Location' : ''}
+                            error={props.checkStartLocation}
+                        />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField id="standard-basic" label="End Location *" onChange={handleGetEndLocation} fullWidth />
+                        <TextField
+                            id="standard-basic"
+                            label="End Location *"
+                            onChange={handleGetEndLocation}
+                            fullWidth
+                            helperText={props.checkEndLocation ? 'Enter End Location' : ''}
+                            error={props.checkEndLocation}
+                        />
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <TextField id="standard-basic" label="Cost *" onChange={handleGetCost} fullWidth />
+                        <TextField
+                            id="standard-basic"
+                            label="Cost *"
+                            onChange={handleGetCost}
+                            fullWidth
+                            type="number"
+                            helperText={props.checkCost ? 'Enter Valid Cost' : ''}
+                            error={props.checkCost}
+                        />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
@@ -172,6 +230,8 @@ function EventInfoForm(props) {
                             name='currency_id'
                             onChange={handleGetCurrency}
                             fullWidth
+                            defaultValue={0}
+                            error={props.checkCurrency}
                             SelectProps={{
                                 MenuProps: {
                                     className: classes.menu,
@@ -179,7 +239,7 @@ function EventInfoForm(props) {
                             }}>
                             {currency.map(c => (
                                 <MenuItem key={c.id} value={c.id}>
-                                    {c.code} - {c.name}
+                                    {c.code} {c.code > 0 ? '-' : ''} {c.name}
                                 </MenuItem>
                             ))}
                         </TextField>
@@ -187,7 +247,7 @@ function EventInfoForm(props) {
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <TextField id="standard-basic" label="Notes *" onChange={handleGetNote} fullWidth />
+                        <TextField id="standard-basic" label="Notes" onChange={handleGetNote} fullWidth />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField

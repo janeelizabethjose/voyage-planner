@@ -1,5 +1,10 @@
 export const currency = [
   {
+    id: 0,
+    code: 'Choose Currency',
+    name: '',
+  },
+  {
     id: 1,
     code: 'AED',
     name: 'United Arab Emirates Dirham',
