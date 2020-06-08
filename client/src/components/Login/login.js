@@ -3,6 +3,7 @@ import axios from 'axios';
 import './login.css';
 import { API_BASE_URL } from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
+import ButterToast, { Cinnamon, POS_BOTTOM, POS_CENTER } from 'butter-toast';
 
 function LoginForm(props) {
     const [state, setState] = useState({
@@ -39,14 +40,11 @@ function LoginForm(props) {
                         redirectToHome();
                         props.showError(null)
                     } else {
-                        props.showError("Username does not exist!");
+                        showErrorMessage("Username does not exist!");
                     }
                 }
-                else if (response.status === 204) {
-                    props.showError("Username and password do not match!");
-                }
                 else {
-                    props.showError("Username does not exist!");
+                    showErrorMessage("Invalid credentials!");
                 }
             })
             .catch(function (error) {
@@ -67,53 +65,66 @@ function LoginForm(props) {
         if (state.email.length && state.password.length) {
             sendDetailsToServer()
         } else {
-            props.showError('Please enter valid username and password')
+            showErrorMessage('Please enter valid username and password')
         }
     }
 
+    const showErrorMessage = (message) => {
+        return ButterToast.raise({
+            content: <Cinnamon.Crisp scheme={Cinnamon.Crisp.SCHEME_GREY}
+                content={() => <div>{message}</div>}
+                title="Oops!" />
+        });
+    }
+
     return (
-        <div className="container d-flex align-items-center flex-column" style={{ paddingTop: "80px" }}>
-            <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-                <span className="headerStyle">Login Here</span>
-                <form>
-                    <div className="form-group text-left">
-                        <label htmlFor="exampleInputEmail1">Email address*</label>
-                        <input type="email"
-                            className="form-control"
-                            id="email"
-                            aria-describedby="emailHelp"
-                            placeholder="Enter email"
-                            value={state.email}
-                            onChange={handleChange}
-                        />
+        <>
+            <div className="container d-flex align-items-center flex-column" style={{ paddingTop: "80px" }}>
+                <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+                    <span className="headerStyle">Login Here</span>
+                    <form>
+                        <div className="form-group text-left">
+                            <label htmlFor="exampleInputEmail1">Email address*</label>
+                            <input type="email"
+                                className="form-control"
+                                id="email"
+                                aria-describedby="emailHelp"
+                                placeholder="Enter email"
+                                value={state.email}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group text-left">
+                            <label htmlFor="exampleInputPassword1">Password*</label>
+                            <input type="password"
+                                className="form-control"
+                                id="password"
+                                placeholder="Password"
+                                value={state.password}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-check">
+                        </div>
+                        <button
+                            type="submit"
+                            className="btn btn-primary"
+                            onClick={handleSubmitClick}
+                        >Submit</button>
+                    </form>
+                    <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
+                        {state.successMessage}
                     </div>
-                    <div className="form-group text-left">
-                        <label htmlFor="exampleInputPassword1">Password*</label>
-                        <input type="password"
-                            className="form-control"
-                            id="password"
-                            placeholder="Password"
-                            value={state.password}
-                            onChange={handleChange}
-                        />
+                    <div className="registerMessage">
+                        <span>Don't have an account? </span>
+                        <span className="loginText" onClick={() => redirectToRegister()}>Register</span>
                     </div>
-                    <div className="form-check">
-                    </div>
-                    <button
-                        type="submit"
-                        className="btn btn-primary"
-                        onClick={handleSubmitClick}
-                    >Submit</button>
-                </form>
-                <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
-                    {state.successMessage}
-                </div>
-                <div className="registerMessage">
-                    <span>Don't have an account? </span>
-                    <span className="loginText" onClick={() => redirectToRegister()}>Register</span>
                 </div>
             </div>
-        </div>
+            <div>
+                <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_CENTER }} />
+            </div>
+        </>
     )
 }
 
