@@ -26,7 +26,7 @@ Trip Plan
 Create the db by importing voyageplanner.sql file (Path: voyage-planner/database/voyageplanner.sql)
 
 ## Installation and Run:
-Clone Repository: git clone git@github.com:janeelizabethjose/voyage-planner.git
+Clone Repository: git clone https://github.com/janeelizabethjose/voyage-planner.git
 
 ## Server Setup(NodeJS- Port:5000):
 - cd server/
