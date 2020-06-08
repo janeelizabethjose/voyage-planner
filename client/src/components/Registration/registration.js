@@ -69,7 +69,7 @@ function RegistrationForm(props) {
                 <span className="headerStyle">Register Here</span>
                 <form>
                     <div className="form-group text-left">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
+                        <label htmlFor="exampleInputEmail1">Email address*</label>
                         <input type="email"
                             className="form-control"
                             id="email"
@@ -80,7 +80,7 @@ function RegistrationForm(props) {
                         />
                     </div>
                     <div className="form-group text-left">
-                        <label htmlFor="exampleInputPassword1">Password</label>
+                        <label htmlFor="exampleInputPassword1">Password*</label>
                         <input type="password"
                             className="form-control"
                             id="password"
@@ -90,7 +90,7 @@ function RegistrationForm(props) {
                         />
                     </div>
                     <div className="form-group text-left">
-                        <label htmlFor="exampleInputPassword1">Confirm Password</label>
+                        <label htmlFor="exampleInputPassword1">Confirm Password*</label>
                         <input type="password"
                             className="form-control"
                             id="confirmPassword"

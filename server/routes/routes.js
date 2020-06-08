@@ -6,12 +6,12 @@ var tripController = require('../controller/tripController');
 
 router.post('/createUser', userController.createUser);
 router.post('/login', userController.login);
-router.post('/getTripInfo', tripController.getTripInfo);
-router.post('/getTripDayInfo', tripController.getTripDayInfo);
+router.get('/getTripInfo?', tripController.getTripInfo);
+router.get('/getTripDayInfo?', tripController.getTripDayInfo);
 router.post('/createTrip', tripController.createTrip);
 router.post('/createTripDay', tripController.createTripDay);
-router.post('/getTripDayEventInfo', tripController.getTripDayEventInfo);
+router.get('/getTripDayEventInfo?', tripController.getTripDayEventInfo);
 router.post('/createTripDayEvent', tripController.createTripDayEvent);
-router.post('/deleteTripPlan', tripController.deleteTripPlan);
+router.delete('/deleteTripPlan/:Id', tripController.deleteTripPlan);
 
 module.exports = router;

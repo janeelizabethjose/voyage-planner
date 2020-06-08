@@ -2,8 +2,13 @@ var tripModel = require('../model/tripModel');
 var paramValidator = require('../validators/paramValidator');
 
 let tripController = {
-    getTripInfo(req, res, next) {
-        tripModel.getTripInfo(req.body).then(response => {
+    getTripInfo(req, res) {
+        if (paramValidator.checkObject({
+            userID: req.query.userID
+        }) !== true) {
+            return res.status(500).json({ error: paramValidator.errorMessage });
+        }
+        tripModel.getTripInfo(req.query).then(response => {
             var responseData = {
                 "rows": response
             }
@@ -12,8 +17,14 @@ let tripController = {
             return res.status(500).json(error);
         })
     },
-    getTripDayInfo(req, res, next) {
-        tripModel.getTripDayInfo(req.body).then(response => {
+    getTripDayInfo(req, res) {
+        if (paramValidator.checkObject({
+            tripID: req.query.tripID,
+            userID: req.query.userID
+        }) !== true) {
+            return res.status(500).json({ error: paramValidator.errorMessage });
+        }
+        tripModel.getTripDayInfo(req.query).then(response => {
             var responseData = {
                 "rows": response
             }
@@ -42,14 +53,14 @@ let tripController = {
             return res.status(500).json(error);
         })
     },
-    getTripDayEventInfo(req, res, next) {
+    getTripDayEventInfo(req, res) {
         if (paramValidator.checkObject({
-            tripDayID: req.body.tripDayID,
-            userID: req.body.userID
+            tripDayID: req.query.tripDayID,
+            userID: req.query.userID
         }) !== true) {
             return res.status(500).json({ error: paramValidator.errorMessage });
         }
-        tripModel.getTripDayEventInfo(req.body).then(response => {
+        tripModel.getTripDayEventInfo(req.query).then(response => {
             var responseData = {
                 "rows": response
             }
@@ -95,12 +106,10 @@ let tripController = {
         })
     },
     deleteTripPlan(req, res, next) {
-        if (paramValidator.checkObject({
-            tripID: req.body.tripID
-        }) !== true) {
-            return res.status(500).json({ error: paramValidator.errorMessage });
+        if (parseInt(req.params.Id) < 1) {
+            return res.status(500).json({ error: "Invalid Input!" });
         }
-        tripModel.deleteTripPlan(req.body).then(response => {
+        tripModel.deleteTripPlan(req.params.Id).then(response => {
             var responseData = {
                 "rows": response
             }

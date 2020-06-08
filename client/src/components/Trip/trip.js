@@ -53,11 +53,10 @@ function TripForm(props) {
     const handleDeleteTripPlan = () => {
 
         if (tripDetail.id) {
-            console.log(tripDetail.id);
             const payload = {
                 "tripID": tripDetail.id,
             }
-            axios.post(API_BASE_URL + 'deleteTripPlan', payload)
+            axios.delete(API_BASE_URL + 'deleteTripPlan/' + payload.tripID)
                 .then(function (response) {
                     if (response.status === 200) {
                         console.log(response);

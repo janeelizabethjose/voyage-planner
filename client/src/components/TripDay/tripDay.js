@@ -88,7 +88,7 @@ function TripDayForm(props) {
             "userID": localStorage.getItem("userID"),
             "tripID": tripDetail.id,
         }
-        axios.post(API_BASE_URL + 'getTripDayInfo', payload)
+        axios.get(API_BASE_URL + 'getTripDayInfo?tripID=' + payload.tripID + '&userID=' + payload.userID)
             .then(function (response) {
                 if (response.status === 200) {
                     setTripDay(response.data.rows);
@@ -165,7 +165,7 @@ function TripDayForm(props) {
             "tripDayID": metaData.id,
             "userID": localStorage.getItem("userID"),
         }
-        axios.post(API_BASE_URL + 'getTripDayEventInfo', payload)
+        axios.get(API_BASE_URL + 'getTripDayEventInfo?tripDayID=' + payload.tripDayID + '&userID=' + payload.userID)
             .then(function (response) {
                 if (response.status === 200) {
                     setTripDayEvents(response.data.rows);

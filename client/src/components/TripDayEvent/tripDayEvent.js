@@ -54,7 +54,7 @@ function TripDayEventForm(props) {
                             <Grid container direction='row' alignItems='center'>
                                 <Icon>label</Icon>
                                 {row.tag && row.tag.split(',').map((t, index) => (
-                                    <Chip key={`${t}-${index}`} size='small' label={t} className={classes.chip} color='primary' />
+                                    <Chip key={`${t}-${index}`} size='small' label={t} className={classes.chip} color='secondary' />
                                 ))}
                             </Grid>
                         </Grid>

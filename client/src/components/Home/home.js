@@ -75,26 +75,31 @@ function Home(props) {
 
     const getTripInformation = (e) => {
         //props.showError(null);
-        const payload = {
-            "userID": localStorage.getItem("userID"),
+        if (localStorage.getItem("userID")) {
+            const payload = {
+                "userID": localStorage.getItem("userID"),
+            }
+            console.log(payload);
+            axios.get(API_BASE_URL + 'getTripInfo?userID=' + payload.userID)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        setTrip(response.data.rows);
+                    }
+                    else if (response.status === 204) {
+                        console.log("Something went wrong!");
+                        //props.showError("Something went wrong!");
+                    }
+                    else {
+                        console.log("Something went wrong!");
+                        //props.showError("Something went wrong!");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            console.log("No user details found!");
         }
-        axios.post(API_BASE_URL + 'getTripInfo', payload)
-            .then(function (response) {
-                if (response.status === 200) {
-                    setTrip(response.data.rows);
-                }
-                else if (response.status === 204) {
-                    console.log("Something went wrong!");
-                    //props.showError("Something went wrong!");
-                }
-                else {
-                    console.log("Something went wrong!");
-                    //props.showError("Something went wrong!");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     };
 
     const handleUpdateName = (data) => {

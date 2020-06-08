@@ -119,9 +119,8 @@ var tripModel = {
     deleteTripPlan: function (params) {
         try {
             return new Promise((resolve, reject) => {
-
                 let deleteStmt = `DELETE td.*, e.* FROM trip_days td LEFT JOIN EVENTS e ON td.id = e.trip_day_id WHERE trip_id = ?`;
-                let deleteValue = [params.tripID];
+                let deleteValue = [params];
                 let deleteMasterStmt = `DELETE FROM trips WHERE id = ?`;
                 //delete from child
                 db.query(deleteStmt, deleteValue, (error, rows) => {
