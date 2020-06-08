@@ -2,7 +2,7 @@ import 'date-fns';
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
-import { TextField, Button, MenuItem, Radio, RadioGroup, Icon, Grid, FormLabel, FormControlLabel, Chip, createStyles, Dialog, DialogContent, DialogTitle, } from '@material-ui/core';
+import { TextField, Button, MenuItem, Icon, Grid } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers';
 import { currency } from '../../assets/currency';
@@ -20,7 +20,7 @@ function getModalStyle() {
     };
 }
 
-let txtTitle, intCategoryID, dtStartTime, dtEndTime, txtStartLocation, txtEndLocation, intCost, intCurrencyID, txtNote, txtTag;
+let txtTitle, intCategoryID, txtStartLocation, txtEndLocation, intCost, intCurrencyID, txtNote, txtTag;
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',

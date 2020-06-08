@@ -24,8 +24,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 function TripDayForm(props) {
-    //console.log(props);
-    //const dashboard = useSelector(state.dashboard);
     const [open, setOpen] = useState(false);
     const [openEvent, setOpenEvent] = useState(false);
     const [tripDetail, setTripDetail] = useState(props.history.location.state.detail);
@@ -35,7 +33,6 @@ function TripDayForm(props) {
     const [TripDayEvents, setTripDayEvents] = useState([]);
     const [TripDate, setTripDate] = useState(moment(props.location.state.detail.start_date).format('MM-DD-YYYY'));
     const [TripMaxDate, setTripMaxDate] = useState(moment(props.location.state.detail.end_date).format('MM-DD-YYYY'));
-    //const [TripEventDate, setTripEventDate] = useState(moment(props.location.state.detail.start_date).format('MM-DD-YYYY HH MM'));
 
     const [TripName, setTripName] = useState();
     const [checkTripName, setcheckTripName] = useState(false);
@@ -145,7 +142,9 @@ function TripDayForm(props) {
             .then(function (response) {
                 if (response.status === 200) {
                     handleCloseEventModal();
-                    handleTripDayEvent(tripDayId);
+                    let metaData = {};
+                    metaData.id = tripDayId;
+                    handleTripDayEvent(metaData);
                 }
                 else {
                     console.log(response);
