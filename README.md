@@ -24,14 +24,18 @@ Prerequisites:
 Database Setup:
 Create the db by importing voyageplanner.sql file (Path: voyage-planner/database/voyageplanner.sql)
 
-Installation:
+Installation and Run:
 Clone Repository: git clone git@github.com:janeelizabethjose/voyage-planner.git
 
-Server Setup(NodeJS):
+Server Setup(NodeJS- Port:5000):
 - cd server/
 - npm install
+- npm start
 
-Client Setup(ReactJS):
+Client Setup(ReactJS- Port:3000):
 - cd client/
 - npm install
+- npm start
+
+After completing instalation and npm start, browser will automatically open the application else hit the following URL in your browser: http://localhost:3000
 
