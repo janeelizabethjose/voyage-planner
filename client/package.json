@@ -13,7 +13,7 @@
     "axios": "^0.19.2",
     "butter-toast": "^3.3.5",
     "date-fns": "^2.14.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dom-factories": "^1.0.2",
